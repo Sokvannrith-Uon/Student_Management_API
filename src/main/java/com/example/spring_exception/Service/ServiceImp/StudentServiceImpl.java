@@ -1,6 +1,7 @@
 package com.example.spring_exception.Service.ServiceImp;
 
 import com.example.spring_exception.Model.Entity.Student;
+import com.example.spring_exception.Model.Request.StudentRequest;
 import com.example.spring_exception.Repository.StudentRepository;
 import com.example.spring_exception.Service.StudentService;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudents() {
         return studentRepository.getAllStudents();
+    }
+
+    @Override
+    public Student CreateNewStudent(StudentRequest studentRequest) {
+        return studentRepository.CreateNewStudent(studentRequest);
     }
 }
