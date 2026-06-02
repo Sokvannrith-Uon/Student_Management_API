@@ -24,4 +24,14 @@ public class StudentServiceImpl implements StudentService {
     public Student CreateNewStudent(StudentRequest studentRequest) {
         return studentRepository.CreateNewStudent(studentRequest);
     }
+
+    @Override
+    public List<Student> getStudentById(Long id) {
+        return studentRepository.getStudentById(id);
+    }
+
+    @Override
+    public Student deleteStudentById(Long id) {
+        return studentRepository.deleteStudentById(id);
+    }
 }

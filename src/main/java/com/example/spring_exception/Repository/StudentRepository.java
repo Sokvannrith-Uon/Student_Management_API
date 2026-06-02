@@ -23,5 +23,12 @@ RETURNING *
 """)
     Student CreateNewStudent(StudentRequest studentRequest);
 
-
+    @Select("""
+select * from students where id=#{id}
+""")
+    List<Student> getStudentById(Long id);
+    @Select("""
+    delete from students where id=#{id} 
+    """)
+    Student deleteStudentById(Long id);
 }

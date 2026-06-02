@@ -12,7 +12,7 @@ import tools.jackson.databind.json.JsonMapper;
 import java.time.Instant;
 import java.util.List;
 @RestController
-@RequestMapping("/{student}")
+@RequestMapping("/student")
 @RequiredArgsConstructor
 public class StudentController {
     public final StudentService studentService;
@@ -27,13 +27,27 @@ public class StudentController {
                 payload(students).build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-    @PostMapping
+    @PostMapping("/createStudent")
     public ResponseEntity<?> createNewStudent(@RequestBody StudentRequest studentRequest){
        Student postStudent = studentService.CreateNewStudent(studentRequest);
        ApiResponse<Student> response = ApiResponse.<Student>builder().
                message("Create student successfully").
                 status(HttpStatus.OK).localtime(Instant.now()).payload(postStudent).
                build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+    @GetMapping("getId/{id}")
+    public ResponseEntity<?> getStudentById(@PathVariable("id") Long Id){
+    List<Student> studentId=studentService.getStudentById(Id);
+        return ResponseEntity.status(HttpStatus.OK).body(studentId);
+    }
+    @DeleteMapping("/{DeleteId}")
+    public ResponseEntity<?> deleteStudentById(@PathVariable("DeleteId") Long Id){
+
+        Student StudentId=studentService.deleteStudentById(Id);
+        ApiResponse<Student> response = ApiResponse.<Student>builder().message("Success").status(HttpStatus.OK).payload(StudentId).
+                build();
+
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
